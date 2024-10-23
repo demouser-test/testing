@@ -1,0 +1,14 @@
+import os
+import subprocess
+
+# Vulnerable code: User input is directly passed to a shell command
+def run_system_command(user_input):
+    command = f"echo {user_input}"
+    os.system(command)  # Vulnerable to shell injection
+
+def unsafe_subprocess_call(user_input):
+    subprocess.call(f"ls {user_input}", shell=True)  # Vulnerable to shell injection
+
+user_input = input("Enter a file name: ")
+run_system_command(user_input)
+unsafe_subprocess_call(user_input)
